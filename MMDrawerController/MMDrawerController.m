@@ -219,23 +219,26 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
     
     [sideDrawerViewController beginAppearanceTransition:NO animated:animated];
     
-    [UIView
-     animateWithDuration:(animated?duration:0.0)
-     delay:0.0
-     options:options
-     animations:^{
-         [self.centerContainerView setFrame:newFrame];
-         [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:0.0];
-     }
-     completion:^(BOOL finished) {
-         [sideDrawerViewController endAppearanceTransition];
-         [self setOpenSide:MMDrawerSideNone];
-         [self resetDrawerVisualStateForDrawerSide:visibleSide];
-         
-         if(completion){
-             completion(finished);
-         }
-     }];
+    void (^animationBlock)() = ^() {
+        [self.centerContainerView setFrame:newFrame];
+        [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:0.0];
+    };
+    void (^animationCompletionBlock)(BOOL finished) = ^(BOOL finished) {
+        [sideDrawerViewController endAppearanceTransition];
+        [self setOpenSide:MMDrawerSideNone];
+        [self resetDrawerVisualStateForDrawerSide:visibleSide];
+        
+        if(completion){
+            completion(finished);
+        }
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:duration delay:0.0 options:options animations:animationBlock completion:animationCompletionBlock];
+    } else {
+        animationBlock();
+        animationCompletionBlock(YES);
+    }
 }
 
 -(void)openDrawerSide:(MMDrawerSide)drawerSide animated:(BOOL)animated completion:(void (^)(BOOL))completion{
