@@ -336,6 +336,9 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
             [self.centerViewController didMoveToParentViewController:self];
         }
     }
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 -(void)setCenterViewController:(UIViewController *)newCenterViewController withCloseAnimation:(BOOL)animated completion:(void(^)(BOOL))completion{
@@ -638,6 +641,10 @@ static CAKeyframeAnimation * bounceKeyFrameAnimationForDistanceOnView(CGFloat di
     for(UIViewController * childViewController in self.childViewControllers){
         [childViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     }
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.centerViewController;
 }
 
 #pragma mark - Setters
