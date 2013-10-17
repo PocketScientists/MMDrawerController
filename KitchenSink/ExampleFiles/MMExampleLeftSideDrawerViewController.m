@@ -28,6 +28,14 @@
 
 @implementation MMExampleLeftSideDrawerViewController
 
+-(id)init{
+    self = [super init];
+    if(self){
+        [self setRestorationIdentifier:@"MMExampleLeftSideDrawerController"];
+    }
+    return self;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSLog(@"Left will appear");
@@ -48,6 +56,10 @@
     NSLog(@"Left did disappear");
 }
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    [self setTitle:@"Left Drawer"];
+}
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     

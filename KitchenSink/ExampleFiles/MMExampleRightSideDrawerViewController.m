@@ -26,6 +26,13 @@
 @end
 
 @implementation MMExampleRightSideDrawerViewController
+-(id)init{
+    self = [super init];
+    if(self){
+        [self setRestorationIdentifier:@"MMExampleRightSideDrawerController"];
+    }
+    return self;
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -45,6 +52,11 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     NSLog(@"Right did disappear");
+}
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    [self setTitle:@"Right Drawer"];
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
