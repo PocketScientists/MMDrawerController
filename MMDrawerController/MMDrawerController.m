@@ -412,7 +412,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
     [self updateShadowForCenterView];
     
     if(animated == NO){
-        if (self.centerViewController.isViewVisible) {
+        if ([self.centerViewController isViewLoaded] && self.centerViewController.view.window != nil) {
             [self.centerViewController beginAppearanceTransition:YES animated:NO];
             [self.centerViewController endAppearanceTransition];
             [self.centerViewController didMoveToParentViewController:self];
