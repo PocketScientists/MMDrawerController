@@ -25,7 +25,7 @@
 
 
 -(MMDrawerController*)mm_drawerController{
-    UIViewController *parentViewController = self.parentViewController;
+    UIViewController *parentViewController = self;
     while (parentViewController != nil) {
         if([parentViewController isKindOfClass:[MMDrawerController class]]){
             return (MMDrawerController *)parentViewController;
