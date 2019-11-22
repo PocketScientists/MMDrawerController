@@ -736,6 +736,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
         [childViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     }
 }
+
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     //We need to support the shadow path rotation animation
